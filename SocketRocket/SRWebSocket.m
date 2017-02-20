@@ -384,7 +384,7 @@ NSString *const SRHTTPResponseErrorKey = @"HTTPResponseStatusCode";
 {
     NSInteger responseCode = CFHTTPMessageGetResponseStatusCode(_receivedHTTPHeaders);
     if (responseCode >= 400) {
-        SRDebugLog(@"Request failed with response code %d", responseCode);
+        SRDebugLog(@"Request failed with response code %ld", (long)responseCode);
         NSError *error = SRHTTPErrorWithCodeDescription(responseCode, 2132,
                                                         [NSString stringWithFormat:@"Received bad response code from server: %d.",
                                                          (int)responseCode]);
@@ -422,7 +422,6 @@ NSString *const SRHTTPResponseErrorKey = @"HTTPResponseStatusCode";
         }
     }];
 }
-
 
 - (void)_readHTTPHeader;
 {
@@ -511,7 +510,7 @@ NSString *const SRHTTPResponseErrorKey = @"HTTPResponseStatusCode";
 
         self.readyState = SR_CLOSING;
 
-        SRDebugLog(@"Closing with code %d reason %@", code, reason);
+        SRDebugLog(@"Closing with code %ld reason %@", (long)code, reason);
 
         if (wasConnecting) {
             [self closeConnection];
@@ -613,7 +612,7 @@ NSString *const SRHTTPResponseErrorKey = @"HTTPResponseStatusCode";
         if (error) {
             *error = SRErrorWithCodeDescription(2134, message);
         }
-        SRDebugLog(message);
+        SRDebugLog(@"%@", message);
         return NO;
     }
 
@@ -637,7 +636,7 @@ NSString *const SRHTTPResponseErrorKey = @"HTTPResponseStatusCode";
         if (error) {
             *error = SRErrorWithCodeDescription(2134, message);
         }
-        SRDebugLog(message);
+        SRDebugLog(@"%@", message);
         return NO;
     }
 
@@ -658,7 +657,7 @@ NSString *const SRHTTPResponseErrorKey = @"HTTPResponseStatusCode";
         if (error) {
             *error = SRErrorWithCodeDescription(2134, message);
         }
-        SRDebugLog(message);
+        SRDebugLog(@"%@", message);
         return NO;
     }
 
